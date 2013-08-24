@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageSession xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Modules>
+    <Module skippedDueTo="Filter" hash="CA-83-18-0F-30-85-41-11-82-09-D5-17-6B-28-6A-BF-52-7D-DA-DA">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_32\mscorlib\v4.0_4.0.0.0__b77a5c561934e089\mscorlib.dll</FullName>
+      <ModuleName>mscorlib</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="DA-11-AB-7A-54-40-91-0F-E3-CC-4F-E4-30-43-80-09-4A-8C-B6-BA">
+      <FullName>F:\Program Files\SharpDevelop\4.3\bin\Tools\NUnit\nunit-console-x86.exe</FullName>
+      <ModuleName>nunit-console</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="23-35-8C-86-05-D5-AE-FE-3C-1F-09-A0-86-02-40-7C-4F-CA-59-41">
+      <FullName>F:\Program Files\SharpDevelop\4.3\bin\Tools\NUnit\lib\nunit.core.dll</FullName>
+      <ModuleName>nunit.core</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="79-F8-9A-22-4E-29-52-37-00-CF-81-FF-1F-EA-05-EC-74-2A-2E-C8">
+      <FullName>F:\Program Files\SharpDevelop\4.3\bin\Tools\NUnit\lib\nunit-console-runner.dll</FullName>
+      <ModuleName>nunit-console-runner</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="57-DD-20-42-DA-33-B3-EE-DA-8C-8E-25-C9-E5-07-B5-08-62-0F-88">
+      <FullName>F:\Program Files\SharpDevelop\4.3\bin\Tools\NUnit\lib\nunit.util.dll</FullName>
+      <ModuleName>nunit.util</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="AD-76-2F-3C-5E-F6-77-0D-C6-AD-AF-A3-90-85-28-07-2D-A0-59-50">
+      <FullName>F:\Program Files\SharpDevelop\4.3\bin\Tools\NUnit\lib\nunit.core.interfaces.dll</FullName>
+      <ModuleName>nunit.core.interfaces</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="44-EF-56-AD-2E-95-D3-A2-8D-AE-F6-EC-B0-9F-A7-FE-0A-93-3C-7A">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Configuration\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll</FullName>
+      <ModuleName>System.Configuration</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="9E-50-DF-F6-68-60-BC-DD-B7-B0-92-C6-8D-23-6C-C3-8D-F4-C3-F6">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</FullName>
+      <ModuleName>System</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="04-EF-53-41-05-0A-78-75-B7-85-2D-67-4D-79-5A-F7-C7-07-9D-F5">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</FullName>
+      <ModuleName>System.Xml</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="95-D7-5D-EB-38-46-68-4C-BD-E5-12-A5-05-EC-7B-C7-58-55-6A-0F">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Runtime.Remoting\v4.0_4.0.0.0__b77a5c561934e089\System.Runtime.Remoting.dll</FullName>
+      <ModuleName>System.Runtime.Remoting</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="23-35-8C-86-05-D5-AE-FE-3C-1F-09-A0-86-02-40-7C-4F-CA-59-41">
+      <FullName>F:\Program Files\SharpDevelop\4.3\bin\Tools\NUnit\lib\nunit.core.dll</FullName>
+      <ModuleName>nunit.core</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="9E-50-DF-F6-68-60-BC-DD-B7-B0-92-C6-8D-23-6C-C3-8D-F4-C3-F6">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System\v4.0_4.0.0.0__b77a5c561934e089\System.dll</FullName>
+      <ModuleName>System</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="Filter" hash="04-EF-53-41-05-0A-78-75-B7-85-2D-67-4D-79-5A-F7-C7-07-9D-F5">
+      <FullName>C:\Windows\Microsoft.Net\assembly\GAC_MSIL\System.Xml\v4.0_4.0.0.0__b77a5c561934e089\System.Xml.dll</FullName>
+      <ModuleName>System.Xml</ModuleName>
+      <Classes />
+    </Module>
+    <Module skippedDueTo="MissingPdb" hash="AD-76-2F-3C-5E-F6-77-0D-C6-AD-AF-A3-90-85-28-07-2D-A0-59-50">
+      <FullName>F:\Program Files\SharpDevelop\4.3\bin\Tools\NUnit\lib\nunit.core.interfaces.dll</FullName>
+      <ModuleName>nunit.core.interfaces</ModuleName>
+      <Classes />
+    </Module>
+    <Module hash="EB-E4-76-8C-55-F7-AB-79-AB-D7-3A-2E-B6-50-0D-DA-6B-DB-59-EE">
+      <FullName>C:\Users\Administrator.WIN7U-20130507D\AppData\Local\Temp\nunit20\ShadowCopyCache\5128_635129739233695563\Tests_16301262\assembly\dl3\3639717f\1291d2bd_c7a0ce01\CommonLang.dll</FullName>
+      <ModuleName>CommonLang</ModuleName>
+      <Files />
+      <Classes>
+        <Class>
+          <FullName>&lt;Module&gt;</FullName>
+          <Methods />
+        </Class>
+        <Class>
+          <FullName>CommonLang.MyClass</FullName>
+          <Methods>
+            <Method visited="false" cyclomaticComplexity="1" sequenceCoverage="0" branchCoverage="0" isConstructor="true" isStatic="false" isGetter="false" isSetter="false">
+              <MetadataToken>100663297</MetadataToken>
+              <Name>System.Void CommonLang.MyClass::.ctor()</Name>
+              <SequencePoints />
+              <BranchPoints />
+              <MethodPoint vc="0" uspid="1" ordinal="0" offset="0" />
+            </Method>
+          </Methods>
+        </Class>
+      </Classes>
+    </Module>
+  </Modules>
+</CoverageSession>

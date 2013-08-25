@@ -52,7 +52,7 @@ namespace CommonLang.UnitTest
 			list.Add(new SimpleObject(2, "xml"));
 			list.Add(new SimpleObject(3, "js"));
 			list.Add(new SimpleObject(4, "css"));
-			list.Add(new SimpleObject(5, "php"));
+			list.Add(new SimpleObject(5, "xml"));
 			list.Add(new SimpleObject(6, "java"));
 			SimpleObject found;
 			found = ListHelper<SimpleObject>.findField<string>(list, "name", "xml");
@@ -61,6 +61,7 @@ namespace CommonLang.UnitTest
 			Assert.AreEqual("java", found.name);
 			found = ListHelper<SimpleObject>.findField<int>(list, "id", 7);
 			Assert.IsNull(found);
+			Assert.AreEqual(2, ListHelper<SimpleObject>.searchField<string>(list, "name", "xml").Count);
 		}
 	}
 	

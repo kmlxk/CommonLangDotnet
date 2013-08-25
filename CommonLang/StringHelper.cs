@@ -52,5 +52,6 @@ namespace CommonLang
 			}
 			return ret;
 		}
+		
 	}
 }

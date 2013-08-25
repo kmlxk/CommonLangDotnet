@@ -186,5 +186,18 @@ namespace CommonLang
             }
             return default(T);
         }
+        
+        public static List<T> searchField<T1>(List<T> list, string fieldName, T1 value)
+        {
+        	List<T> ret = new List<T>();
+            Type type = typeof(T);
+            FieldInfo field = type.GetField(fieldName);
+            foreach (T item in list) {
+                if (field.GetValue(item).Equals(value)) {
+            		ret.Add(item);
+                }
+            }
+            return ret;
+        }
     }
 }

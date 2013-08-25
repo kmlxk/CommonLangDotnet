@@ -36,7 +36,7 @@ namespace CommonLang.Ston.UnitTest
             Assert.AreEqual(".1", dict["BEGIN"]);
             // 测试更新数据
             table.Data[0][0] = ".100";
-            table.update("END", 0, ".200");
+            table.set("END", 0, ".200");
             Dictionary<string, string> dict2 = table.getDictionary(0);
             Assert.AreEqual(".100", dict2["BEGIN"]);
             Assert.AreEqual(".200", dict2["END"]);

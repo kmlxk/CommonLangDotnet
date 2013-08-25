@@ -87,6 +87,9 @@ namespace CommonLang.Ston
             }
             for (int i = _hasHeader ? 1 : 0; i < lines.Length; i++)
             {
+            	if (lines[i].Trim(new char[]{'\t'}).Length == 0) {
+            		continue;
+            	}
                 string[] cols = lines[i].Split('\t');
                 _data.Add(CommonLang.ArrayHelper<string>.toList(cols));
             }
@@ -107,8 +110,13 @@ namespace CommonLang.Ston
             }
             return ret;
         }
+        
+        public string get(int row, string column)
+        {
+            return _data[row][_columnIndexMap[column]];
+        }
 
-        public void update(string column, int row, string value)
+        public void set(string column, int row, string value)
         {
             _data[row][_columnIndexMap[column]] = value;
         }

@@ -47,8 +47,8 @@ namespace CommonLang.Ston
 
         public Table(string ston, bool hasHeader)
         {
-            unserialize(ston);
             _hasHeader = hasHeader;
+            unserialize(ston);
         }
 
         public string serialize()

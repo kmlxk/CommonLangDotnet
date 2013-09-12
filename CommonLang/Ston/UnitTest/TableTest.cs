@@ -20,8 +20,7 @@ namespace CommonLang.Ston.UnitTest
 		private const string TEST_DATA_1 = @"BEGIN	END	DELAY
 .1	.2	5
 .1	.2	5
-.1	.2	5
-";    
+.1	.2	5";    
 
 		
 		[Test] public void TableBasicTest()
@@ -61,6 +60,25 @@ namespace CommonLang.Ston.UnitTest
             Table table = new Table(TEST_DATA_1, true);
             string actural = table.serialize();
             Assert.AreEqual(TEST_DATA_1.Replace("\r", ""), actural);
+        }
+        
+        [Test]
+        public void toArrayTest()
+        {
+            Table table = new Table(TEST_DATA_1, true);
+            string[][] actural = table.toArray();
+            Assert.AreEqual(3, actural.Length);
+            Assert.AreEqual(3, actural[0].Length);
+            Assert.AreEqual(".1", actural[0][0]);
+        }
+        
+        [Test]
+        public void getColTest()
+        {
+            Table table = new Table(TEST_DATA_1, true);
+            string[] actural = table.getCol(0);
+            Assert.AreEqual(3, actural.Length);
+            Assert.AreEqual(".1", actural[0]);
         }
         
 		[Test]

@@ -135,6 +135,38 @@ namespace CommonLang.Ston
             }
             return ret;
         }
+        
+        public string[][] toArray()
+        {
+        	string[][] ret = new string[_data.Count][];
+        	int i = 0;
+        	for (i = 0; i < _data.Count; i++) {
+        		ret[i] = _data[i].ToArray();
+        	}
+        	return ret;
+        }
+        
+        
+        public string[] getCol(int index)
+        {
+        	string[] ret = new string[_data.Count];
+        	int i = 0;
+        	for (i = 0; i < _data.Count; i++) {
+        		ret[i] = _data[i][index];
+        	}
+        	return ret;
+        }
+        
+        public string[] getCol(string columnName)
+        {
+        	string[] ret = new string[_data.Count];
+        	int i = 0;
+        	for (i = 0; i < _data.Count; i++) {
+        		ret[i] = this.get(i, columnName);
+        	}
+        	return ret;
+        }
+        
 
         public List<string> escapeList(List<string> list)
         {

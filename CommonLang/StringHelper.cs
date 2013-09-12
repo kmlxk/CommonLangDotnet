@@ -12,7 +12,7 @@ using System.Text;
 namespace CommonLang
 {
 	/// <summary>
-	/// Description of StringHelper.
+	/// Description of stringHelper.
 	/// </summary>
 	public class StringHelper
 	{
@@ -26,7 +26,7 @@ namespace CommonLang
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static string UpperFirst(string s)
+        public static string upperFirst(string s)
         {
             if (s.Length > 0) {
                 return s.Substring(0, 1).ToUpper() + s.Substring(1);
@@ -51,6 +51,39 @@ namespace CommonLang
 				ret = ret.Substring(0, ret.Length - separator.Length);
 			}
 			return ret;
+		}
+		
+		public static string toCapitalizeCamelCase(string s) {
+			if (s == null) {
+				return null;
+			}
+			s = toCamelCase(s);
+			return s.Substring(0, 1).ToUpper() + s.Substring(1);
+		}
+		
+		public static string toCamelCase(string s) {
+			return toCamelCase(s, '_');
+		}
+		
+		public static string toCamelCase(string s, char SEPARATOR) {
+			if (s == null) {
+			    return null;
+			}
+			s = s.ToLower();
+			StringBuilder sb = new StringBuilder(s.Length);
+			bool upperCase = false;
+			for (int i = 0; i < s.Length; i++) {
+				char c = s[i];
+			    if (c == SEPARATOR) {
+					upperCase = true;
+			    } else if (upperCase) {
+					sb.Append(Char.ToUpper(c));
+					upperCase = false;
+			    } else {
+					sb.Append(c);
+			    }
+			}
+			return sb.ToString();
 		}
 		
 	}

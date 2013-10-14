@@ -93,5 +93,14 @@ namespace CommonLang
             }
             return ret;
         }
+
+        public static Dictionary<string, TValue> fromNameValueCollection(System.Collections.Specialized.NameValueCollection nvc)
+        {
+            Dictionary<string, TValue> ret = new Dictionary<string, TValue>();
+            foreach (string key in nvc.AllKeys) {
+                ret[key] = (TValue)Convert.ChangeType(nvc[key], typeof(TValue));
+            }
+            return ret;
+        }
     }
 }

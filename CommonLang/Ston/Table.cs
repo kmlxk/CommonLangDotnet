@@ -72,6 +72,10 @@ namespace CommonLang.Ston
 
         public void unserialize(string ston)
         {
+            if (ston == null)
+            {
+                return;
+            }
             string[] lines = ston.Replace('\r', '\n').Replace("\n\n", "\n").Split('\n');
             if (_hasHeader)
             {

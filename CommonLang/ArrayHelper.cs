@@ -59,6 +59,16 @@ namespace CommonLang
 			}
 			return list;
 		}
-		
-	}
+
+
+        public static Tdest[] changeType<Tdest>(T[] ar)
+        {
+            Tdest[] ret = new Tdest[ar.Length];
+            for (int i = 0; i < ret.Length; i++)
+            {
+                ret[i] = (Tdest)Convert.ChangeType(ar[i], typeof(Tdest));
+            }
+            return ret;
+        }
+    }
 }

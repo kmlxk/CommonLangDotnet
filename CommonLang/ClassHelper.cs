@@ -17,7 +17,19 @@ namespace CommonLang
 	/// </summary>
 	public class ClassHelper
 	{
-		
+
+        public static Dictionary<string, T1> toDictionary<T1>(Object obj) where T1 : new()
+        {
+            Dictionary<string, T1> dict = new Dictionary<string, T1>();
+            Type type = obj.GetType();
+            PropertyInfo[] props = type.GetProperties();
+            foreach (PropertyInfo prop in props)
+            {
+                dict.Add(prop.Name, (T1)Convert.ChangeType(prop.GetValue(obj, null), typeof(T1)));
+            }
+            return dict;
+        }
+
 		public static T1 fromDictionary<T1>(IDictionary<string, object> dict) where T1 : new()
 		{
 			T1 obj = new T1();
@@ -104,7 +116,7 @@ namespace CommonLang
             }
 			return CommonLang.ListHelper<string>.join(ret, "; ");
 		}
-        
-	}
+
+    }
 }
 

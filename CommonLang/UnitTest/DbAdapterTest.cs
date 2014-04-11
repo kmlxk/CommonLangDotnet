@@ -42,7 +42,7 @@ namespace CommonLang.UnitTest
 			dict["question"] = "是否";
 			dict["answer"] = "是的";
 			dict["askname"] = "小y";
-			dict["createtime"] = new KmDbLiteral("NOW");
+			dict["createtime"] = new DbLiteral("NOW");
 			string sql = da.getInsert("zhidao", dict);
 			Console.Write(sql);
 			Assert.AreEqual("INSERT INTO da_zhidao (title,question,answer,askname,createtime) VALUES('是否可行','是否','是的','小y',NOW)", sql);

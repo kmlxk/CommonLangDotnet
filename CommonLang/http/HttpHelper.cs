@@ -91,49 +91,52 @@ namespace CommonLang.http
 			res.Close();
 		}
 		
-		public static Dictionary<string, object> getTextWithGzip(string webUrl, CookieContainer cookieContainer, Encoding encoding, string refer, WebProxy webProxy)
+		public static Dictionary<string, object> downloadLikeFirefox(string url,
+		                                                  CookieContainer cookieContainer,
+		                                                  Encoding encoding,
+		                                                  string refer,
+		                                                  WebProxy webProxy)
 		{
 			Dictionary<string, object> ret = new Dictionary<string, object>();
-			HttpWebRequest webrequest = null;
+			HttpWebRequest request = null;
 			string html;
-			webrequest = WebRequest.Create(webUrl) as HttpWebRequest;
-			
-			webrequest.ServicePoint.Expect100Continue = false;
-			webrequest.ServicePoint.UseNagleAlgorithm = false;
-			webrequest.ServicePoint.ConnectionLimit = 65500;
-			webrequest.AllowWriteStreamBuffering = false;
+			request = WebRequest.Create(url) as HttpWebRequest;
+			request.ServicePoint.Expect100Continue = false;
+			request.ServicePoint.UseNagleAlgorithm = false;
+			request.ServicePoint.ConnectionLimit = 65500;
+			request.AllowWriteStreamBuffering = false;
 			if (webProxy!=null)
 			{
-				webrequest.Proxy = webProxy;
+				request.Proxy = webProxy;
 			}
 			else
 			{
-				webrequest.Proxy = GlobalProxySelection.GetEmptyWebProxy();
+				request.Proxy = GlobalProxySelection.GetEmptyWebProxy();
 			}
 			if (!String.IsNullOrEmpty(refer))
 			{
-				webrequest.Referer = refer;
+				request.Referer = refer;
 			}
 			else
 			{
-				webrequest.Referer = webUrl;
+				request.Referer = url;
 			}
-			webrequest.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip,deflate");
-			webrequest.CookieContainer = cookieContainer;
-			webrequest.Timeout = 5000;
-			webrequest.UserAgent = "User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)";
-			webrequest.Accept = "*/*";
-			webrequest.KeepAlive = true;
-			webrequest.Headers.Add("Accept-Language", "zh-cn,en-us;q=0.5");
+			request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; rv:28.0) Gecko/20100101 Firefox/28.0";
+			request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+			request.Headers.Add("Accept-Language", "zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3");
+			request.Headers.Add("Accept-Encoding", "gzip, deflate");
+			request.CookieContainer = cookieContainer;
+			request.Timeout = 15000;
+			request.KeepAlive = true;
 			
-			using (HttpWebResponse response = (HttpWebResponse)webrequest.GetResponse())
+			using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
 			{
-				
+				ret["headers"] = response.Headers;
 				if (response.ContentEncoding.ToLower().Contains("gzip"))
 				{
 					using (GZipStream stream = new GZipStream(response.GetResponseStream(), CompressionMode.Decompress))
 					{
-						using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+						using (StreamReader reader = new StreamReader(stream, encoding))
 						{
 							html = reader.ReadToEnd();
 						}
@@ -143,7 +146,7 @@ namespace CommonLang.http
 				{
 					using (DeflateStream stream = new DeflateStream(response.GetResponseStream(), CompressionMode.Decompress))
 					{
-						using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+						using (StreamReader reader = new StreamReader(stream, encoding))
 						{
 							html = reader.ReadToEnd();
 						}
@@ -154,15 +157,14 @@ namespace CommonLang.http
 				{
 					using (Stream stream = response.GetResponseStream())
 					{
-						using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+						using (StreamReader reader = new StreamReader(stream, encoding))
 						{
 							html = reader.ReadToEnd();
 						}
 					}
 				}
 			}
-			
-			ret["cookieContainer"] = cookieContainer;
+			ret["cookies"] = cookieContainer;
 			ret["html"] = html;
 			return ret;
 		}

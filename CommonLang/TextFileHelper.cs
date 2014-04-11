@@ -18,10 +18,9 @@ namespace CommonLang
 	public class TextFileHelper
 	{
 
-		public static string readAll(string filename, string encoding)
+		public static string readAll(string filename, Encoding enc)
 		{
 			FileStream file = new FileStream(filename, FileMode.Open, FileAccess.Read);
-			Encoding enc = Encoding.GetEncoding(encoding);
 			string line;
 			StringBuilder sb = new StringBuilder();
 			StreamReader sr;
@@ -41,10 +40,9 @@ namespace CommonLang
 			return sb.ToString();
 		}
 		
-		public static void writeAll(string filename,string content, string encoding)
+		public static void writeAll(string filename,string content, Encoding enc)
 		{
 			FileStream file = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-			Encoding enc = Encoding.GetEncoding(encoding);
 			StreamWriter sw;
 			if (enc != null) {
 				sw = new StreamWriter(file, enc);

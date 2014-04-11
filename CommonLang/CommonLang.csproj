@@ -41,6 +41,9 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -52,10 +55,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayEx.cs" />
     <Compile Include="ArrayHelper.cs" />
-    <Compile Include="ColorHelper.cs" />
+    <Compile Include="ClassHelper.cs" />
+    <Compile Include="DateHelper.cs" />
+    <Compile Include="DbAdapter.cs" />
+    <Compile Include="DictionaryHelper.cs" />
+    <Compile Include="EasyuiTreeNode.cs" />
+    <Compile Include="EncodingChecker.cs" />
+    <Compile Include="FastMethodInvoker.cs" />
+    <Compile Include="HtmlHelper.cs" />
+    <Compile Include="http\HttpHelper.cs" />
     <Compile Include="ListHelper.cs" />
+    <Compile Include="PathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ston\Ston.cs" />
+    <Compile Include="Ston\Table.cs" />
+    <Compile Include="Ston\UnitTest\StonTest.cs" />
+    <Compile Include="Ston\UnitTest\TableTest.cs" />
     <Compile Include="StringHelper.cs" />
+    <Compile Include="TextFileHelper.cs" />
+    <Compile Include="TreeNode.cs" />
+    <Compile Include="UnitTest\ArrayHelperTest.cs" />
+    <Compile Include="UnitTest\ClassHelperTest.cs" />
+    <Compile Include="UnitTest\DbAdapterTest.cs" />
+    <Compile Include="UnitTest\ListHelperTest.cs" />
+    <Compile Include="UnitTest\PathHelperTest.cs" />
+    <Compile Include="UnitTest\ReflectTest.cs" />
+    <Compile Include="UnitTest\StringHelperTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="http" />
+    <Folder Include="Ston" />
+    <Folder Include="Ston\UnitTest" />
+    <Folder Include="UnitTest" />
   </ItemGroup>
 </Project>

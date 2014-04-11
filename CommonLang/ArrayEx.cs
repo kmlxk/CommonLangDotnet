@@ -231,22 +231,5 @@ namespace CommonLang
             return ret;
         }
 
-        public static void registerFastJson()
-        {
-            fastJSON.JSON.Instance.RegisterCustomType(typeof(ArrayEx), toJson, fromJson);
-        }
-
-        public static string toJson(object data)
-        {
-            ArrayEx array = (ArrayEx)data;
-            string json = fastJSON.JSON.Instance.ToJSON(array.getRawType());
-            return json;
-        }
-
-        public static object fromJson(string data)
-        {
-            return null;
-        }
-
     }
 }

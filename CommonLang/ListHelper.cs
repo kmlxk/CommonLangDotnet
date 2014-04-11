@@ -82,16 +82,43 @@ namespace CommonLang
             string pn_cssClassField,
             string pn_parentIdField)
         {
-            return listToTree<Tpk>(list, pn_idField, pn_textField, pn_actionField, pn_cssClassField, pn_parentIdField, "");
+            return listToTree<Tpk>(list, pn_idField, pn_textField, pn_actionField, pn_cssClassField, pn_parentIdField, "",
+            default(T));
         }
 
+        public static TreeNode<T> listToTree<Tpk>(List<T> list,
+            string pn_idField,
+            string pn_textField,
+            string pn_actionField,
+            string pn_cssClassField,
+            string pn_parentIdField,
+            T p_rootNode)
+        {
+            return listToTree<Tpk>(list, pn_idField, pn_textField, pn_actionField, pn_cssClassField, pn_parentIdField, "",
+            p_rootNode);
+        }
+
+        public static TreeNode<T> listToTree<Tpk>(List<T> list,
+            string pn_idField,
+            string pn_textField,
+            string pn_actionField,
+            string pn_cssClassField,
+            string pn_parentIdField,
+            string pn_priorField) 
+        {
+            return listToTree<Tpk>(list, pn_idField, pn_textField, pn_actionField, pn_cssClassField, pn_parentIdField, "",
+            default(T));
+        }
+
+        /// 根节点的特征 NULL,0,或者p_rootNode给定的主键值
         public static TreeNode<T> listToTree<Tpk>(List<T> list, 
             string pn_idField, 
             string pn_textField, 
             string pn_actionField, 
             string pn_cssClassField,
             string pn_parentIdField,
-            string pn_priorField) 
+            string pn_priorField,
+            T p_rootNode) 
         {
             Type type = typeof(T);
             PropertyInfo idField = type.GetProperty(pn_idField);
@@ -102,10 +129,11 @@ namespace CommonLang
             PropertyInfo priorField = type.GetProperty(pn_priorField);
             
             TreeNode<T> tree = new TreeNode<T>();
+            Tpk nodeId;
+            Tpk parentId;
 
             // 多个根节点的情况下，需要新建一个根根节点
-            TreeNode<T> rrNode = new TreeNode<T>();
-            rrNode.children = new List<TreeNode<T>>();
+            TreeNode<T> rrNode;
 
             // convert to map
             Dictionary<Tpk, T> objMap = new Dictionary<Tpk, T>();
@@ -130,25 +158,44 @@ namespace CommonLang
 
             // convert to map
             TreeNode<T> rootNode = null;
+            // rrNode = getRootNode(list, p_rootNode);
+            rrNode = new TreeNode<T>();
+            rrNode.children = new List<TreeNode<T>>();
+            if (p_rootNode != null)
+            {
+                foreach (T obj in list)
+                {
+                    nodeId = (Tpk)idField.GetValue(obj, null);
+                    // 给定了id的根节点是最高级别的根节点
+                    if (nodeId.Equals((Tpk)idField.GetValue(p_rootNode, null)))
+                    {
+                        rrNode.data = obj;
+                        rootNode = nodeMap[nodeId];
+                    }
+                }
+            }
             foreach (T obj in list)
             {
                 TreeNode<T> node = nodeMap[(Tpk)idField.GetValue(obj, null)];
-                Tpk parentId = (Tpk)parentIdField.GetValue(node.data, null);
-                if (Convert.ToString(parentId).Equals("0"))
+                parentId = (Tpk)parentIdField.GetValue(node.data, null);
+                nodeId = (Tpk)idField.GetValue(node.data, null);
+                // 真正的根节点，直接跳过
+                if (p_rootNode != null && nodeId.Equals((Tpk)idField.GetValue(p_rootNode, null)))
                 {
-                    rootNode = node;
-                    rrNode.children.Add(rootNode);
+                    continue;
+                }
+                if (parentId == null || parentId.ToString().Length==0 || CommonLang.StringHelper.toInt(parentId) == 0)
+                {
+                    if (rrNode.data == null)
+                    {
+                        rrNode.children.Add(node);
+                    }
                 }
                 else
                 {
                     //obsoleted: 如果级联删除失效，出现孤岛节点，则异常
                     //如果引用的父节点不在列表中，添加root.children
                     //if (parentId == null || !nodeMap.ContainsKey(parentId))
-                    if (parentId == null || CommonLang.StringHelper.toInt(parentId) == 0)
-                    {
-                        rootNode = node;
-                        continue;
-                    }
                     // 如果孤岛节点在寻找上一节点，则跳过
                     if (!nodeMap.ContainsKey(parentId)) {
                         continue;
@@ -170,16 +217,18 @@ namespace CommonLang
             return rootNode;
         }
 
+
         public static void TreeSort(TreeNode<T> tree)
         {
-            if (tree.children == null)
+            if (tree == null || tree.children == null)
                 return;
+            tree.children.Sort(TreeNodeCompare);
             foreach (TreeNode<T> subtree in tree.children)
             {
                 if (subtree.children == null) {
                     continue;
                 }
-                tree.children.Sort(TreeNodeCompare);
+                TreeSort(subtree);
             }
         }
         public static int TreeNodeCompare(TreeNode<T> t1, TreeNode<T> t2)
@@ -220,7 +269,7 @@ namespace CommonLang
             int capacity = list.Count;
             if (list.Count > 0)
             {
-                capacity = (list[0].ToString().Length + separator.Length) * list.Count;
+                capacity = (list[0] == null ? 0 : list[0].ToString().Length + separator.Length) * list.Count;
             }
             if (capacity <= 0)
             {
@@ -234,7 +283,10 @@ namespace CommonLang
                 {
                     sb.Append(separator);
                 }
-                sb.Append(list[i].ToString());
+                if (list[i] != null)
+                {
+                    sb.Append(list[i].ToString());
+                }
             }
             string ret = sb.ToString();
             return ret;
@@ -346,5 +398,17 @@ namespace CommonLang
             }
             return rootNode;
         }
+
+        public static List<TTo> changeType<TTo>(List<T> list)
+        {
+            List<TTo> ret = new List<TTo>(list.Count);
+            foreach (object obj in list)
+            { 
+                ret.Add((TTo)Convert.ChangeType(obj, typeof(TTo)));
+            }
+            return ret;
+        }
+
+
     }
 }

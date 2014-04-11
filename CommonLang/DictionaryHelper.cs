@@ -82,13 +82,13 @@ namespace CommonLang
 		}
 
 
-        public static Dictionary<T1, T2> changeType<T1, T2>(Dictionary<TKey, TValue> dict)
+        public static Dictionary<TToKey, ToTValue> changeType<TToKey, ToTValue>(Dictionary<TKey, TValue> dict)
         {
-            Dictionary<T1, T2> ret = new Dictionary<T1, T2>();
+            Dictionary<TToKey, ToTValue> ret = new Dictionary<TToKey, ToTValue>();
             foreach (KeyValuePair<TKey, TValue> kv in dict)
             {
-                ret.Add((T1)Convert.ChangeType(kv.Key, typeof(T1)), 
-                    (T2)Convert.ChangeType(kv.Value, typeof(T2))
+                ret.Add((TToKey)Convert.ChangeType(kv.Key, typeof(TToKey)), 
+                    (ToTValue)Convert.ChangeType(kv.Value, typeof(ToTValue))
                     );
             }
             return ret;

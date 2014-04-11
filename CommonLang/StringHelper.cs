@@ -119,5 +119,36 @@ namespace CommonLang
             }
 
         }
+
+        public static string fromCamelCase(string s)
+        {
+            return fromCamelCase(s, '_');
+        }
+
+        public static string fromCamelCase(string s, char SEPARATOR)
+        {
+            if (s == null || s.Length == 0)
+            {
+                return null;
+            }
+            StringBuilder sb = new StringBuilder(s.Length);
+            sb.Append(s[0]); 
+            for (int i = 1; i < s.Length; i++)
+            {
+                char c = s[i];
+                char c0 = s[i-1];
+                if ((c >= 65 && c <= 90) && // cur char is uppercase
+                    (c0 >= 97 && c0 <= 122))// last char is lowercase
+                {
+                    sb.Append(SEPARATOR); 
+                    sb.Append(c);
+                }
+                else
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString().ToLower();
+        }
     }
 }

@@ -41,6 +41,9 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
+    <Reference Include="MySQLDriverCS">
+      <HintPath>..\..\xWebQQ\lib\MySQLDriverCS\MySQLDriverCS.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -59,7 +62,7 @@
     <Compile Include="ArrayHelper.cs" />
     <Compile Include="ClassHelper.cs" />
     <Compile Include="DateHelper.cs" />
-    <Compile Include="DbAdapter.cs" />
+    <Compile Include="SqlBuilder.cs" />
     <Compile Include="DictionaryHelper.cs" />
     <Compile Include="EasyuiTreeNode.cs" />
     <Compile Include="EncodingChecker.cs" />
@@ -78,7 +81,8 @@
     <Compile Include="TreeNode.cs" />
     <Compile Include="UnitTest\ArrayHelperTest.cs" />
     <Compile Include="UnitTest\ClassHelperTest.cs" />
-    <Compile Include="UnitTest\DbAdapterTest.cs" />
+    <Compile Include="UnitTest\HtmlHelperTest.cs" />
+    <Compile Include="UnitTest\SqlBuilderTest.cs" />
     <Compile Include="UnitTest\ListHelperTest.cs" />
     <Compile Include="UnitTest\PathHelperTest.cs" />
     <Compile Include="UnitTest\ReflectTest.cs" />

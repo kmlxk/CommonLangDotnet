@@ -57,5 +57,13 @@ namespace CommonLang
             TimeSpan ts = dateTime - dt;
             return (int)ts.TotalSeconds;
         }
+
+        public static DateTime fromTimestamp(long timestamp)
+        {
+            DateTime start = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            TimeSpan ts = new TimeSpan(long.Parse(timestamp + "0000000"));
+            DateTime ret = start.Add(ts);
+            return ret;
+        }        
     }
 }

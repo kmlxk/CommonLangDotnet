@@ -33,16 +33,16 @@ namespace CommonLang.orm
 		}
 	}
 	
-	public class DbAdapterConfig
+	public class SqlBuilderConfig
 	{
 		public string TableName{get;set;}
 		public string PrimaryKey{get;set;}
 	}
 	
-	public class DbLiteral
+	public class SqlLiteral
 	{
 		protected string _sql;
-		public DbLiteral(string sql)
+		public SqlLiteral(string sql)
 		{
 			_sql = sql;
 		}
@@ -53,23 +53,23 @@ namespace CommonLang.orm
 		}
 	}
 	
-	public class DbHelper
+	public class SqlBuilder
 	{
-		public static DbHelper instance = new DbHelper();
-		protected DbAdapterConfig _config;
+		public static SqlBuilder instance = new SqlBuilder();
+		protected SqlBuilderConfig _config;
 		
-		public DbHelper()
+		public SqlBuilder()
 		{
-			_config = new DbAdapterConfig();
+			_config = new SqlBuilderConfig();
 			_config.TableName = "{0}";
 			_config.PrimaryKey = "{0}_id";
 		}
 		
-		public DbHelper(DbAdapterConfig config)
+		public SqlBuilder(SqlBuilderConfig config)
 		{
 			_config = config;
 		}
-		public static DbHelper getInstance()
+		public static SqlBuilder getInstance()
 		{
 			return instance;
 		}
@@ -86,8 +86,10 @@ namespace CommonLang.orm
 			List<string> values = new List<string>(keys.Count);
 			foreach(string key in keys)
 			{
-				if (dict[key].GetType().Equals(typeof(DbLiteral)))
-				{
+				if (dict[key] == null) {
+					values.Add("''");
+				}else if (dict[key].GetType().Equals(typeof(SqlLiteral))) {
+					
 					values.Add(dict[key].ToString());
 				} else
 				{
@@ -105,11 +107,17 @@ namespace CommonLang.orm
 			string sql = "DELETE FROM {0} WHERE {1}";
 			return string.Format(sql, getTablename(tablename), where);
 		}
-		public string getSelect(string tablename, string where)
+		public string getSelect(string tablename, string fields, string where, string suffix)
 		{
+			if (fields == null || fields.Length == 0)
+				fields = "*";
+			if (where == null || where.Length == 0)
+				where = "";
+			if (suffix == null || suffix.Length == 0)
+				suffix = "";
 			StringBuilder sb = new StringBuilder();
-			string sql = "SELECT * FROM {0} WHERE {1}";
-			return string.Format(sql, getTablename(tablename), where);
+			string sql = "SELECT {0} FROM {1} {2} {3}";
+			return string.Format(sql, new object[]{fields, getTablename(tablename), where, suffix});
 		}
 	}
 }
